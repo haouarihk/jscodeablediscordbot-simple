@@ -1,4 +1,4 @@
 {
-	"443126331807629333": "programmed=(message)=>{\n\nmessage.delete()}",
-	"526577079509057537": "programmed=(message)=>{\n\nmessage.member.addRule(\"admin\")\n}"
+	"443126331807629333": "programmed=(message)=>{\n\nmessage.channel.send('This won\\'t work')}",
+	"526577079509057537": "programmed=(message)=>{\n\nmessange.channel.send('test')\n}"
 }

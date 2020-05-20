@@ -12,7 +12,7 @@ const listener = app.listen(process.env.PORT, () => {
 
 //Go and google uptime robot/cula.io
 
-const userCommands=new Db('./userCommands.json')
+const userCommands=new Db('./userCommands.jsonnn')
 require("dotenv").config();
 const folder = "./clientsfunctions/";
 const fs = require("fs");
@@ -83,7 +83,7 @@ ${getCode(msg.content)}}`
     try {
       let programmed = ()=>"You don't have any code to run."
       eval(userCommands.value[msg.author.id]||'');
-      let proxiedMsg=new Proxy(msg,{get:(obj,prop)=>{console.log(obj, prop)if(typeof obj[prop]=='function'){return 'tremolloFuncs'}else{return obj[prop]}}})
+      let genNewProxy=()=>new Proxy(msg,{get:(obj,prop)=>{if(typeof obj[prop]=='function'){return 'tremolloFuncs'}else if(typeof obj[prop]=="object"||typeof obj[proj]==){return obj[prop]}}})
       let o = programmed(proxiedMsg);
       msg.channel.send( o!=null?(o.length!==0 ?o :"Attention! An empty string showed up!\nIt is very dangerous under its wild form.\nDo not approach it!"): "nothing showed up...");
     } catch (err) {
@@ -117,8 +117,8 @@ function findthis(string) {
   return string.replace(/this\w*\[/gi, "nope");
 }
 function filterBadWords(string) {
-  return string.replace(process.env.f__k, "f**k")
-                .replace(process.env.sh__t,'s**t')
+  return string.split(process.env.f__k).join("f**k")
+                .split(process.env.sh__t).join('s**t')
 }
 //Wait i think i have an idea
 //We can use proxies

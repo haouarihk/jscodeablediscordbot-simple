@@ -84,10 +84,10 @@ ${getCode(msg.content)}}`
       let programmed = ()=>"You don't have any code to run."
       eval(userCommands.value[msg.author.id]||'');
       let o = programmed(msg);
-      msg.channel.send( o==null || o== ? o : "nothing showed up...");
+      msg.channel.send( o!=null?(o.length!==0 ?o :"Attention! An empty string showed up!\nIt is very dangerous under its wild form.\nDo not approach it!"): "nothing showed up...");
     } catch (err) {
       msg.channel.send("error " + err);
-    }
+    }// i will be back soon
   }
 });
 

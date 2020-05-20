@@ -18,16 +18,16 @@ class Db {
         var genProxy=data=>new Proxy(data,{
             set:(obj,prop,val)=>{
                 obj[prop] = val;
-              this.value
                 if(this.saveOnChangeBool){
                     this.update();
                 }
+              return true;
             },
             get:(obj,prop)=>{
-                return genProxy(obj[prop])
+                return typeof obj[prop]=='object'?genProxy(obj[prop]):obj[prop]
             }
         })
-        this.value=new Proxy(this._value,autosave)
+        this.value=genProxy(this._value)
     }
 
     exist(index) {

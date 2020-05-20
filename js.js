@@ -5,7 +5,7 @@ module.exports = async (message, msg) => {
     return true
 }
 
-async function writeFile(messageCode, msg) {
+function writeFile(messageCode, msg) {
     const file = folder + msg.member.displayName + '.js'
     const main = `
     programmed=(message)=>{
@@ -13,9 +13,9 @@ async function writeFile(messageCode, msg) {
     }    
 `  
     if (!fs.existsSync(folder)) {
-        fs.appenddirector(folder,()=>{
-          
-        })
-    }//Write file does this
-    return await fs.writeFile(file, main,"utf-8");
+        fs.appenddirectory(folder,()=>{
+        }) 
+    }//I think it can
+        //although as a fallback i made it myself
+    return fs.writeFileSync(file, main,"utf-8",()=>{});
 }

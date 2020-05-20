@@ -1,20 +1,17 @@
 
 const express = require("express");
 const app = express();
-
-
 app.use(express.static("public"));
-
 app.get("/", (request, response) => {
   response.status(200).sendFile(__dirname+"/index.html")
   console.log("breath")
 });
-
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
 
 //Go and google uptime robot/cula.io
+
 
 require("dotenv").config();
 const folder = "./clientsfunctions/";
@@ -30,7 +27,6 @@ const alpha= setInterval(()=>{
 client.login(process.env.bot_Token);
   console.log("trying to connect....")
 },3000);
-
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   clearInterval(alpha);
@@ -43,7 +39,6 @@ client.on("message", async msg => {
     msg.delete();
     msg.channel.send(msg.content);
   }
-
   if (msg.content.startsWith("%help")) {
     msg.reply(`you can use those commands
         -for help %help
@@ -73,6 +68,8 @@ client.on("message", async msg => {
     msg.delete();
     userid = "";
   }
+  
+  
   if (msg.content.startsWith("code ```js")) {
     try {
       await js(getCode(msg.content), msg);
@@ -84,7 +81,7 @@ client.on("message", async msg => {
   if (msg.content.startsWith("wolfrun")) {
     try {
       const file = folder + msg.member.displayName + ".js";
-      programmedfile = fs.readFileSync(file, "utf8");
+      if(fs.existsSync(file))programmedfile = fs.readFileSync(file, "utf8", ()=>{});
       let programmed = ()=>"You don't have any code to run."
       eval(programmedfile);
       let o = programmed(msg);
@@ -97,11 +94,6 @@ client.on("message", async msg => {
 
 
 function getCode(msg) {
-  
-  
-  
-  
-  
   let message = msg
     .split("```js")[1]
     .split("```")[0]

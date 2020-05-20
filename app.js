@@ -1,10 +1,11 @@
-const Db=require('./db.js');
+const Db = require("./db.js");
 const express = require("express");
+const filter = require('./filter.js')
 const app = express();
 app.use(express.static("public"));
 app.get("/", (request, response) => {
-  response.status(200).sendFile(__dirname+"/index.html")
-  console.log("breath")
+  response.status(200).sendFile(__dirname + "/index.html");
+  console.log("breath");
 });
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
@@ -12,7 +13,7 @@ const listener = app.listen(process.env.PORT, () => {
 
 //Go and google uptime robot/cula.io
 
-const userCommands=new Db('./userCommands.jsonnn')
+const userCommands = new Db("./userCommands.jsonnn");
 require("dotenv").config();
 const folder = "./clientsfunctions/";
 const fs = require("fs");
@@ -22,11 +23,10 @@ const client = new Discord.Client();
 let programmedfile;
 const simon = ["say BeatmyBot", "say boblebehlio"];
 
-
-const alpha= setInterval(()=>{
-client.login(process.env.bot_Token);
-  console.log("trying to connect....")
-},3000);
+const alpha = setInterval(() => {
+  client.login(process.env.bot_Token);
+  console.log("trying to connect....");
+}, 3000);
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   clearInterval(alpha);
@@ -68,57 +68,50 @@ client.on("message", async msg => {
     msg.delete();
     userid = "";
   }
-  
-  
+
   if (msg.content.startsWith("code ```js")) {
     try {
-      userCommands.value[msg.author.id]=`programmed=(message)=>{
-${getCode(msg.content)}}`
+      userCommands.value[msg.author.id] = `programmed=(message)=>{
+${filter(msg.content)}}`;
       msg.channel.send("bib bob got programmed");
     } catch (err) {
-      msg.channel.send("error" + err);
+      msg.channel.send("error " + err);
     }
   }
   if (msg.content.startsWith("wolfrun")) {
     try {
-      let programmed = ()=>"You don't have any code to run."
-      eval(userCommands.value[msg.author.id]||'');
-      let genNewProxy=()=>new Proxy(msg,{get:(obj,prop)=>{if(typeof obj[prop]=='function'){return 'tremolloFuncs'}else if(typeof obj[prop]=="object"||typeof obj[proj]==){return obj[prop]}}})
+      let programmed = () => "You don't have any code to run.";
+      eval(userCommands.value[msg.author.id] || "");
+      let genNewProxy = data =>
+        new Proxy(data, {
+          get: (obj, prop) => {
+            if (typeof obj[prop] == "function") {
+              return "tremolloFuncs";
+            } else if (
+              typeof obj[prop] == "object" ||
+              typeof obj[prop] == "array"
+            ) {
+              return genNewProxy(obj[prop]);
+            } else {
+              return obj[prop];
+            }
+          }
+        });
+      let proxiedMsg = genNewProxy(msg);
       let o = programmed(proxiedMsg);
-      msg.channel.send( o!=null?(o.length!==0 ?o :"Attention! An empty string showed up!\nIt is very dangerous under its wild form.\nDo not approach it!"): "nothing showed up...");
+      msg.channel.send(
+        o != null
+          ? o.length !== 0
+            ? o
+            : "Attention! An empty string showed up!\nIt is very dangerous under its wild form.\nDo not approach it!"
+          : "nothing showed up..."
+      );
     } catch (err) {
       msg.channel.send("error " + err);
-    }// 
+    } //
   }
 });
 
 
-function getCode(msg) {
-  let message = msg
-    .split("```js")[1]
-    .split("```")[0]
-    .replace(/client/gi, "à")
-    .replace(/require/gi, "à")
-    .replace(/Discord/gi, "à")
-    .replace(/fs/gi, "à")
-    .replace(/console/gi, "à")
-    .replace(/print/gi, "à")
-    .replace(/import/gi, "à")
-    .replace(/eval/gi, "à")
-    .replace(/Function/gi, "à")
-    .replace(/this\[/gi, "à")
-    .replace(/process/gi, "à");
-  message = findthis(message);
-  message = filterBadWords(message);
-  return message;
-}
-
-function findthis(string) {
-  return string.replace(/this\w*\[/gi, "nope");
-}
-function filterBadWords(string) {
-  return string.split(process.env.f__k).join("f**k")
-                .split(process.env.sh__t).join('s**t')
-}
 //Wait i think i have an idea
 //We can use proxies

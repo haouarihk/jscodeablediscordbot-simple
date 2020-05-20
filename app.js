@@ -108,10 +108,16 @@ function getCode(msg) {
     .replace(/this\[/gi, "à")
     .replace(/process/gi, "à");
   message = findthis(message);
+  message = filterBadWords(message);
   return message;
 }
 
 function findthis(string) {
   return string.replace(/this\w*\[/gi, "nope");
 }
-
+function filterBadWords(string) {
+  return string.replace(/fuck/gi, "f**k")
+                .replace(/shit/gi,'s**t')
+}
+//Wait i think i have an idea
+//

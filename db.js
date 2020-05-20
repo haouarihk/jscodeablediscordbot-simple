@@ -15,14 +15,18 @@ class Db {
         }
         this._value = JSON.parse(fs.readFileSync(file, "utf8"));
         this.saveOnChangeBool = true;
-        var autosave={
+        var genProxy=data=>new Proxy(data,{
             set:(obj,prop,val)=>{
                 obj[prop] = val;
+              this.value
                 if(this.saveOnChangeBool){
                     this.update();
                 }
+            },
+            get:(obj,prop)=>{
+                return genProxy(obj[prop])
             }
-        }
+        })
         this.value=new Proxy(this._value,autosave)
     }
 

@@ -1,6 +1,6 @@
 const Db = require("./db.js");
 const express = require("express");
-const filter = require('./filter.js')
+const filter = require("./filter.js");
 const app = express();
 app.use(express.static("public"));
 app.get("/", (request, response) => {
@@ -72,7 +72,7 @@ client.on("message", async msg => {
   if (msg.content.startsWith("code ```js")) {
     try {
       userCommands.value[msg.author.id] = `programmed=(message)=>{
-${filter(msg.content)}}`;
+          ${filter.getCode(msg.content)}}`;
       msg.channel.send("bib bob got programmed");
     } catch (err) {
       msg.channel.send("error " + err);
@@ -102,7 +102,7 @@ ${filter(msg.content)}}`;
       msg.channel.send(
         o != null
           ? o.length !== 0
-            ? o
+            ? filter.filter(o)
             : "Attention! An empty string showed up!\nIt is very dangerous under its wild form.\nDo not approach it!"
           : "nothing showed up..."
       );
@@ -111,7 +111,6 @@ ${filter(msg.content)}}`;
     } //
   }
 });
-
 
 //Wait i think i have an idea
 //We can use proxies

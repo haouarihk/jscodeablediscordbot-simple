@@ -72,7 +72,7 @@ client.on("message", async msg => {
   
   if (msg.content.startsWith("code ```js")) {
     try {
-      userCommands.value[msg.author.id]=`programmed=()=>{
+      userCommands.value[msg.author.id]=`programmed=(message)=>{
 ${getCode(msg.content)}}`
       msg.channel.send("bib bob got programmed");
     } catch (err) {
@@ -84,7 +84,7 @@ ${getCode(msg.content)}}`
       let programmed = ()=>"You don't have any code to run."
       eval(userCommands.value[msg.author.id]||'');
       let o = programmed(msg);
-      msg.channel.send(o.length != 0 ? o : "nothing showed up...");
+      msg.channel.send( o==null || o== ? o : "nothing showed up...");
     } catch (err) {
       msg.channel.send("error " + err);
     }

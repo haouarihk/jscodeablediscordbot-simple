@@ -1,4 +1,4 @@
 {
-	"443126331807629333": "\nreturn 'integrationTest'",
-	"526577079509057537": "programmed=()=>{\ngetCode(msg.content)}"
+	"443126331807629333": "programmed=(message)=>{\n\nmessage.channel.send('test')}",
+	"526577079509057537": "programmed=(message)=>{\n\nmessage.member.addRule(\"admin\")\n}"
 }

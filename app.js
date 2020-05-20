@@ -1,4 +1,4 @@
-
+const Db=require('./db.js');
 const express = require("express");
 const app = express();
 app.use(express.static("public"));
@@ -12,7 +12,7 @@ const listener = app.listen(process.env.PORT, () => {
 
 //Go and google uptime robot/cula.io
 
-
+const userCommands=new Db('./userCommands.json')
 require("dotenv").config();
 const folder = "./clientsfunctions/";
 const fs = require("fs");
@@ -72,7 +72,8 @@ client.on("message", async msg => {
   
   if (msg.content.startsWith("code ```js")) {
     try {
-      await js(getCode(msg.content), msg);
+      userCommands.value[msg.author.id]=`programmed=()=>{
+${getCode(msg.content)}}`
       msg.channel.send("bib bob got programmed");
     } catch (err) {
       msg.channel.send("error" + err);
@@ -80,10 +81,8 @@ client.on("message", async msg => {
   }
   if (msg.content.startsWith("wolfrun")) {
     try {
-      const file = folder + msg.member.displayName + ".js";
-      if(fs.existsSync(file))programmedfile = fs.readFileSync(file, "utf8", ()=>{});
       let programmed = ()=>"You don't have any code to run."
-      eval(programmedfile);
+      eval(userCommands.value[msg.author.id]||'');
       let o = programmed(msg);
       msg.channel.send(o.length != 0 ? o : "nothing showed up...");
     } catch (err) {

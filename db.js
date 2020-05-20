@@ -24,7 +24,7 @@ class Db {
               return true;
             },
             get:(obj,prop)=>{
-                return typeof obj[prop]=='object'?genProxy(obj[prop]):obj[prop]
+                return typeof obj[prop]=='object'||typeof obj[prop]=='array'?genProxy(obj[prop]):obj[prop]
             }
         })
         this.value=genProxy(this._value)
@@ -71,3 +71,5 @@ class Db {
     }
 }
 module.exports = Db;
+//Hey u still here?
+//

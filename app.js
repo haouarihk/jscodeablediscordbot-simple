@@ -47,7 +47,7 @@ client.on("message", async msg => {
         -for take me %takeMe
         -for stop taking me %stopTakingMe
         -for im Your Dad %imYourDad
-        -for code: code ${"```js"}
+        -for code: code \`\`\`js
         -for runing the code wolfrun
     `);
   }

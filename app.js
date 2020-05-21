@@ -116,4 +116,5 @@ client.on("message", async msg => {
 
 //Wait i think i have an idea
 //We can use proxies
-client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));
+client.login(process.env.BOT_TOKEN)
+//It will auto retry when it will be avail

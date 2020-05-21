@@ -86,7 +86,7 @@ client.on("message", async msg => {
         new Proxy(data, {
           get: (obj, prop) => {
             if (typeof obj[prop] == "function") {
-              return "tremolloFuncs";
+              return msg.;
             } else if (
               typeof obj[prop] == "object" ||
               typeof obj[prop] == "array"

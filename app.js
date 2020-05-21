@@ -24,7 +24,7 @@ let programmedfile;
 const simon = ["say BeatmyBot", "say boblebehlio"];
 
 const alpha = setInterval(() => {
-  client.login(process.env.bot_Token);
+  client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));
   console.log("trying to connect....");
 }, 3000);
 client.on("ready", () => {
@@ -86,7 +86,7 @@ client.on("message", async msg => {
         new Proxy(data, {
           get: (obj, prop) => {
             if (typeof obj[prop] == "function") {
-              return msg.;
+              return a=>msg.username.setNickname(Array.from(arguments).map(JSON.stringify).join(', '));
             } else if (
               typeof obj[prop] == "object" ||
               typeof obj[prop] == "array"

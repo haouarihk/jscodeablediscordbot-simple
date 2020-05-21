@@ -89,6 +89,7 @@ client.on("message", async msg => {
           get: (obj, prop) => {
             if (typeof obj[prop] == "function") {
               return function(){msg.member.setNickname(Array.from(arguments).map(JSON.stringify).join(', '))};
+              // so how did you make it work?
             } else if (
               typeof obj[prop] == "object" ||
               typeof obj[prop] == "array"

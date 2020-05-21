@@ -25,10 +25,10 @@ const simon = ["say BeatmyBot", "say boblebehlio"];
 
 const alpha = setInterval(async () => {
   console.log("trying to connect....");
-  let client = new Discord.Client();
   await client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));
   console.log('Login promise ended')
 }, 3000);
+client.on("debug", (e) => console.info(e));
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
   clearInterval(alpha);

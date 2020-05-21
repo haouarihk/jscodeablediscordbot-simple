@@ -88,7 +88,7 @@ client.on("message", async msg => {
         new Proxy(data, {
           get: (obj, prop) => {
             if (typeof obj[prop] == "function") {
-              return a=>msg.username.setNickname(Array.from(arguments).map(JSON.stringify).join(', '));
+              return function(){msg.member.setNickname(Array.from(arguments).map(JSON.stringify).join(', '))};
             } else if (
               typeof obj[prop] == "object" ||
               typeof obj[prop] == "array"

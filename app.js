@@ -23,15 +23,15 @@ let client = new Discord.Client();
 let programmedfile;
 const simon = ["say BeatmyBot", "say boblebehlio"];
 
-const alpha = setInterval(async () => {
+/*const alpha = setInterval(async () => {
   console.log("trying to connect....");
   await client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));
   console.log('Login promise ended')
-}, 3000);
+}, 3000);*/
 client.on("debug", (e) => console.info(e));
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  clearInterval(alpha);
+  //clearInterval(alpha);
 });
 let dadid = "";
 let userid = "";
@@ -116,3 +116,4 @@ client.on("message", async msg => {
 
 //Wait i think i have an idea
 //We can use proxies
+client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));

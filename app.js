@@ -23,9 +23,10 @@ const client = new Discord.Client();
 let programmedfile;
 const simon = ["say BeatmyBot", "say boblebehlio"];
 
-const alpha = setInterval(() => {
-  client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));
+const alpha = setInterval(async () => {
   console.log("trying to connect....");
+  await client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));
+  console.log('Login promise ended')
 }, 3000);
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);

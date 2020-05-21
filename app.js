@@ -19,12 +19,13 @@ const folder = "./clientsfunctions/";
 const fs = require("fs");
 const Discord = require("discord.js");
 const js = require("./js.js");
-const client = new Discord.Client();
+let client = new Discord.Client();
 let programmedfile;
 const simon = ["say BeatmyBot", "say boblebehlio"];
 
 const alpha = setInterval(async () => {
   console.log("trying to connect....");
+  let client = new Discord.Client();
   await client.login(process.env.BOT_TOKEN).catch((e)=>console.error(e));
   console.log('Login promise ended')
 }, 3000);

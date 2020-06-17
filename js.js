@@ -9,7 +9,11 @@ function writeFile(messageCode, msg) {
     const file = folder + msg.member.displayName + '.js'
     const main = `
     programmed=(message)=>{
+      try{
         ${messageCode}
+      }catch(err){
+        return err
+      }
     }    
 `  
     if (!fs.existsSync(folder)) {

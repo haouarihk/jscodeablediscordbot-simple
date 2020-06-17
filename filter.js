@@ -1,7 +1,7 @@
 function filter(message){
-  message = findthis(message);
-  message = filterBadWords(message);
-  return message
+  let msg = findthis(message);
+  msg = filterBadWords(msg);
+  return msg
 }
 function getCode(msg){
   return   msg
@@ -9,6 +9,7 @@ function getCode(msg){
     .split("```")[0]
     .replace(/client/gi, "à")
     .replace(/require/gi, "à")
+    .replace(/msg/gi, "à")
     .replace(/Discord/gi, "à")
     .replace(/fs/gi, "à")
     .replace(/console/gi, "à")
@@ -27,7 +28,7 @@ module.exports.getCode=getCode;
 module.exports.filter=filter;
 
 function findthis(string) {
-  return string.replace(/this\w*\[/gi, "nope");
+  return string.toString().replace(/this\w*\[/gi, "nope");
 }
 function filterBadWords(string) {
   return string

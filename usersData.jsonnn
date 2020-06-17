@@ -1,0 +1,24 @@
+{
+	"526577079509057537": {
+		"isTaken": false,
+		"command": "programmed=(message)=>{\n  \nreturn \"qar!question is this a legally question when its made by non AI bot\"\n\n}\n  ",
+		"isDad": true
+	},
+	"443126331807629333": {
+		"command": "programmed=(message)=>{\n  \nmsg.channel.send(\"Uh, oh...\")\nreturn \"This is a problem...\";\n\n}\n  "
+	},
+	"657700607762890776": {
+		"isTaken": false
+	},
+	"672869664384352266": {},
+	"685093043078037534": {
+		"isTaken": false
+	},
+	"539062805807104003": {},
+	"664468378387218432": {
+		"command": "programmed=(message)=>{\n  \nconst list = [];\nlet str = \"\";\nfor (let i = 1; i <= 6; i++) {\n  str += i;\n  list.push(`qar!question test ${str}`);\n}\nfor (const item of list) {\n  à.channel.send(item);\n}\nreturn \"qar!question Did this work?\";\n\n}\n  "
+	},
+	"712255120556949554": {},
+	"715519484848504864": {},
+	"198173772103155712": {}
+}
